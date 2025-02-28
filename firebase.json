@@ -1,0 +1,1 @@
+{"firestore":{"rules":"firestore.rules","indexes":"firestore.indexes.json"},"flutter":{"platforms":{"dart":{"lib/firebase_options.dart":{"projectId":"watches-e-commerce","configurations":{"web":"1:572994747647:web:4253720761d6b0cc5360ca"}}}}}}
