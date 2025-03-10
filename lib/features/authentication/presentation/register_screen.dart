@@ -1,12 +1,14 @@
 import 'package:ecommerce_website/core/routing/app_router.dart';
 import 'package:ecommerce_website/core/shared/custom_footer_widget.dart';
 import 'package:ecommerce_website/core/validation/text_validation.dart';
+import 'package:ecommerce_website/features/authentication/logic/google_cubit/google_cubit.dart';
 import 'package:ecommerce_website/features/authentication/logic/register_cubit/register_cubit.dart';
 import 'package:ecommerce_website/features/authentication/presentation/widgets/custom_auth_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -45,7 +47,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
-        child: BlocListener<RegisterCubit, RegisterState>(
+        child: BlocConsumer<RegisterCubit, RegisterState>(
           listener: (context, state) {
             if (state is RegisterLoading) {
               isEnabled = false;
@@ -54,12 +56,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
               context.push(AppRouter.homeScreen);
             }
             if (state is RegisterFailure) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(state.errMessage)),
-              );
+              isEnabled = true;
             }
           },
-          child: Column(
+          builder: (context, state) => Column(
             children: [
               Padding(
                 padding: EdgeInsets.symmetric(
@@ -106,9 +106,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   return 'Please enter your name';
-                                } else if (!TextValidation.isValidEmail(
-                                    value)) {
-                                  return 'Enter a valid email';
                                 }
                                 return null;
                               },
@@ -118,17 +115,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               enabled: isEnabled,
                               controller: _emailController,
                               decoration: InputDecoration(
+                                errorText: (state is RegisterFailure &&
+                                        (state).errMessage.isNotEmpty)
+                                    ? (state).errMessage // ✅
+                                    : null,
                                 hintText: 'Email',
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(4.r),
                                 ),
                               ),
                               validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please enter your email';
-                                }
-
-                                return null;
+                                return TextValidation.emailValidator(value);
                               },
                             ),
                             SizedBox(height: 20.h),
@@ -143,10 +140,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               ),
                               obscureText: true,
                               validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please enter your password';
-                                }
-                                return null;
+                                return TextValidation.passwordValidator(value);
                               },
                             ),
                             SizedBox(height: 20.h),
@@ -173,7 +167,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               builder: (context, state) {
                                 return SizedBox(
                                   width: double.infinity,
-                                  height: 40.h,
+                                  height: 45.h,
                                   child: ElevatedButton(
                                     onPressed: () {
                                       if (_formKey.currentState!.validate()) {
@@ -198,7 +192,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                               color: Colors.white,
                                             ))
                                         : Text(
-                                            'Login',
+                                            'Sign Up',
                                             style: TextStyle(
                                               fontSize: isMobile ? 16.sp : 8.sp,
                                               fontWeight: FontWeight.w500,
@@ -209,33 +203,60 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               },
                             ),
                             SizedBox(height: 16.h),
-                            SizedBox(
-                              width: double.infinity,
-                              height: 56.h,
-                              child: OutlinedButton.icon(
-                                onPressed: () {
-                                  BlocProvider.of<RegisterCubit>(context)
-                                      .signUpWithGoogle();
-                                },
-                                icon: Image.asset(
-                                  'assets/icons/IconGoogle.png',
-                                  height: 20.h,
-                                ),
-                                label: Text(
-                                  'Login with Google',
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: isMobile ? 14.sp : 8.sp,
-                                    fontWeight: FontWeight.w500,
+                            BlocConsumer<GoogleCubit, GoogleState>(
+                              listener: (context, state) {
+                                if (state is GoogleLoading) {
+                                  isEnabled = false;
+                                }
+                                if (state is GoogleSuccess) {
+                                  isEnabled = true;
+                                  context.push(AppRouter.homeScreen);
+                                }
+                                if (state is GoogleFailure) {
+                                  isEnabled = true;
+                                }
+                              },
+                              builder: (context, state) {
+                                return SizedBox(
+                                  width: double.infinity,
+                                  height: 56.h,
+                                  child: OutlinedButton.icon(
+                                    onPressed: () {
+                                      BlocProvider.of<GoogleCubit>(context)
+                                          .signUpWithGoogle();
+                                    },
+                                    icon: Image.asset(
+                                      'assets/icons/IconGoogle.png',
+                                      height: 20.h,
+                                    ),
+                                    label: state is GoogleLoading
+                                        ? const SizedBox(
+                                            height: 15,
+                                            width: 15,
+                                            child: CircularProgressIndicator(
+                                              strokeWidth: 2,
+                                              color: Colors.black,
+                                            ),
+                                          )
+                                        : Text(
+                                            'Sign Up with Google',
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: isMobile ? 14.sp : 8.sp,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                    style: OutlinedButton.styleFrom(
+                                      side:
+                                          BorderSide(color: Colors.grey[300]!),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(4.r),
+                                      ),
+                                    ),
                                   ),
-                                ),
-                                style: OutlinedButton.styleFrom(
-                                  side: BorderSide(color: Colors.grey[300]!),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(4.r),
-                                  ),
-                                ),
-                              ),
+                                );
+                              },
                             ),
                             SizedBox(height: isMobile ? 8.h : 24.h),
                             Center(

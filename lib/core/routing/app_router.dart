@@ -1,3 +1,4 @@
+import 'package:ecommerce_website/features/authentication/logic/google_cubit/google_cubit.dart';
 import 'package:ecommerce_website/features/authentication/logic/login_cubit/login_cubit.dart';
 import 'package:ecommerce_website/features/authentication/logic/register_cubit/register_cubit.dart';
 import 'package:ecommerce_website/features/authentication/presentation/login_screen.dart';
@@ -36,16 +37,21 @@ class AppRouter {
       GoRoute(
         path: loginScreen,
         name: loginScreen,
-        builder: (context, state) => BlocProvider(
-          create: (context)=>LoginCubit(),
-          child: const LoginScreen()),
+        builder: (context, state) => MultiBlocProvider(providers: [
+          BlocProvider(create: (context) => LoginCubit()),
+          BlocProvider(create: (context) => GoogleCubit())
+        ], child: const LoginScreen()),
       ),
       GoRoute(
         path: signUpScreen,
         name: signUpScreen,
-        builder: (context, state) => BlocProvider(
-          create: (context)=>RegisterCubit(),
-          child: const RegisterScreen(),),
+        builder: (context, state) => MultiBlocProvider(
+          providers: [
+            BlocProvider(create: (context) => RegisterCubit()),
+            BlocProvider(create: (context) => GoogleCubit())
+          ],
+          child: const RegisterScreen(),
+        ),
       ),
       // GoRoute(
       //   path: forgetPassword,
