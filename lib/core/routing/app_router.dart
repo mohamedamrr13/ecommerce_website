@@ -18,7 +18,7 @@ class AppRouter {
   static const homeScreen = "/homeScreen";
 
   static GoRouter router = GoRouter(
-    initialLocation: homeScreen,
+    initialLocation: loginScreen,
     errorPageBuilder: (context, state) => MaterialPage(
       key: state.pageKey,
       child: Scaffold(

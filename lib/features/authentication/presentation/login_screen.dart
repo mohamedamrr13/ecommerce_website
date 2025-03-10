@@ -67,10 +67,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             isEnabled = true;
                             context.push(AppRouter.homeScreen);
                           }
-                          if(state is LoginFailure){
+                          if (state is LoginFailure) {
                             isEnabled = true;
                           }
-
                         },
                         builder: (context, state) {
                           return Column(
@@ -97,7 +96,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   controller: _emailController,
                                   decoration: InputDecoration(
                                     errorText: state is LoginFailure
-                                        ? (state as LoginFailure).errMessage
+                                        ? (state).errMessage
                                         : null,
                                     hintText: 'Email',
                                     border: OutlineInputBorder(
@@ -105,36 +104,31 @@ class _LoginScreenState extends State<LoginScreen> {
                                     ),
                                   ),
                                   validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'Please enter your email';
-                                    } else if (!TextValidation.isValidEmail(
-                                        value)) {
-                                      return "Enter a valid email";
-                                    }
+                                    TextValidation.emailValidator(value);
                                     return null;
                                   }),
                               SizedBox(height: 20.h),
                               TextFormField(
-                                enabled: isEnabled,
-                                controller: _passwordController,
-                                decoration: InputDecoration(
-                                  hintText: 'Password',
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(4.r),
+                                  enabled: isEnabled,
+                                  controller: _passwordController,
+                                  decoration: InputDecoration(
+                                    errorText: state is LoginFailure
+                                        ? (state).errMessage
+                                        : null,
+                                    hintText: 'Password',
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(4.r),
+                                    ),
                                   ),
-                                ),
-                                obscureText: true,
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please enter your password';
-                                  }
-                                  return null;
-                                },
-                              ),
+                                  obscureText: true,
+                                  validator: (value) {
+                                    TextValidation.passwordValidator(value);
+                                    return null;
+                                  }),
                               SizedBox(height: 30.h),
                               SizedBox(
                                 width: double.infinity,
-                                height: 40.h,
+                                height: 56.h,
                                 child: ElevatedButton(
                                   onPressed: () {
                                     if (_formKey.currentState!.validate()) {
@@ -172,7 +166,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                 height: 56.h,
                                 child: OutlinedButton.icon(
                                   onPressed: () {
-                                    // Handle Google sign in
+                                    BlocProvider.of<LoginCubit>(context)
+                                        .signUpWithGoogle();
                                   },
                                   icon: Image.asset(
                                     'assets/icons/IconGoogle.png',
