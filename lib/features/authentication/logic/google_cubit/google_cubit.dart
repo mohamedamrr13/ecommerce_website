@@ -29,6 +29,9 @@ class GoogleCubit extends Cubit<GoogleState> {
     } on FirebaseAuthException catch (e) {
       debugPrint(Failure.getMessageFromErrorCode(e.code));
       emit(GoogleFailure(errMessage: Failure.getMessageFromErrorCode(e.code)));
+    } catch (e) {
+      debugPrint("Unexpected error: $e");
+      emit(GoogleFailure(errMessage: "Google Sign-In was canceled"));
     }
     return null;
   }

@@ -189,6 +189,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                             height: 20,
                                             width: 20,
                                             child: CircularProgressIndicator(
+                                              strokeWidth: 3,
                                               color: Colors.white,
                                             ))
                                         : Text(
@@ -214,6 +215,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 }
                                 if (state is GoogleFailure) {
                                   isEnabled = true;
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(state.errMessage),
+                                      backgroundColor: Colors.black,
+                                    ),
+                                  );
                                 }
                               },
                               builder: (context, state) {
@@ -231,10 +238,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     ),
                                     label: state is GoogleLoading
                                         ? const SizedBox(
-                                            height: 15,
-                                            width: 15,
+                                            height: 20,
+                                            width: 20,
                                             child: CircularProgressIndicator(
-                                              strokeWidth: 2,
+                                              strokeWidth: 3,
                                               color: Colors.black,
                                             ),
                                           )
