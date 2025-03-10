@@ -1,6 +1,7 @@
 import 'package:ecommerce_website/core/routing/app_router.dart';
 import 'package:ecommerce_website/core/shared/custom_footer_widget.dart';
 import 'package:ecommerce_website/core/validation/text_validation.dart';
+import 'package:ecommerce_website/features/authentication/logic/google_cubit/google_cubit.dart';
 import 'package:ecommerce_website/features/authentication/logic/login_cubit/login_cubit.dart';
 import 'package:ecommerce_website/features/authentication/presentation/widgets/custom_auth_appbar.dart';
 import 'package:flutter/material.dart';
@@ -64,7 +65,6 @@ class _LoginScreenState extends State<LoginScreen> {
                             isEnabled = false;
                           }
                           if (state is LoginSuccess) {
-                            isEnabled = true;
                             context.push(AppRouter.homeScreen);
                           }
                           if (state is LoginFailure) {
@@ -95,8 +95,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                   enabled: isEnabled,
                                   controller: _emailController,
                                   decoration: InputDecoration(
-                                    errorText: state is LoginFailure
-                                        ? (state).errMessage
+                                    errorText: (state is LoginFailure &&
+                                            (state).errMessage.isNotEmpty)
+                                        ? (state).errMessage // ✅
                                         : null,
                                     hintText: 'Email',
                                     border: OutlineInputBorder(
@@ -104,17 +105,20 @@ class _LoginScreenState extends State<LoginScreen> {
                                     ),
                                   ),
                                   validator: (value) {
-                                    TextValidation.emailValidator(value);
+                                    if (value == null || value.isEmpty) {
+                                      return "Please Enter Your Email";
+                                    } else {
+                                      TextValidation.emailValidator(value);
+                                    }
                                     return null;
                                   }),
                               SizedBox(height: 20.h),
                               TextFormField(
+                                  autovalidateMode:
+                                      AutovalidateMode.onUserInteraction,
                                   enabled: isEnabled,
                                   controller: _passwordController,
                                   decoration: InputDecoration(
-                                    errorText: state is LoginFailure
-                                        ? (state).errMessage
-                                        : null,
                                     hintText: 'Password',
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(4.r),
@@ -122,13 +126,17 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                   obscureText: true,
                                   validator: (value) {
-                                    TextValidation.passwordValidator(value);
+                                    if (value == null || value.isEmpty) {
+                                      return "Please Enter Your Password";
+                                    } else {
+                                      TextValidation.passwordValidator(value);
+                                    }
                                     return null;
                                   }),
                               SizedBox(height: 30.h),
                               SizedBox(
                                 width: double.infinity,
-                                height: 56.h,
+                                height: 45.h,
                                 child: ElevatedButton(
                                   onPressed: () {
                                     if (_formKey.currentState!.validate()) {
@@ -161,33 +169,62 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                               ),
                               SizedBox(height: 16.h),
-                              SizedBox(
-                                width: double.infinity,
-                                height: 56.h,
-                                child: OutlinedButton.icon(
-                                  onPressed: () {
-                                    BlocProvider.of<LoginCubit>(context)
-                                        .signUpWithGoogle();
-                                  },
-                                  icon: Image.asset(
-                                    'assets/icons/IconGoogle.png',
-                                    height: 20.h,
-                                  ),
-                                  label: Text(
-                                    'Login with Google',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: isMobile ? 14.sp : 8.sp,
-                                      fontWeight: FontWeight.w500,
+                              BlocConsumer<GoogleCubit, GoogleState>(
+                                listener: (context, state) {
+                                  if (state is GoogleLoading) {
+                                    isEnabled = false;
+                                  }
+                                  if (state is GoogleSuccess) {
+                                    isEnabled = true;
+                                    context.push(AppRouter.homeScreen);
+                                  }
+                                  if (state is GoogleFailure) {
+                                    isEnabled = true;
+                                  }
+                                },
+                                builder: (context, state) {
+                                  return SizedBox(
+                                    width: double.infinity,
+                                    height: 56.h,
+                                    child: OutlinedButton.icon(
+                                      onPressed: () async {
+                                        await BlocProvider.of<GoogleCubit>(
+                                                context)
+                                            .signUpWithGoogle();
+                                      },
+                                      icon: Image.asset(
+                                        'assets/icons/IconGoogle.png',
+                                        height: 20.h,
+                                      ),
+                                      label: state is GoogleLoading
+                                          ? const SizedBox(
+                                              height: 15,
+                                              width: 15,
+                                              child: CircularProgressIndicator(
+                                                strokeWidth: 2,
+                                                color: Colors.black,
+                                              ),
+                                            )
+                                          : Text(
+                                              'Login with Google',
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize:
+                                                    isMobile ? 14.sp : 8.sp,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                      style: OutlinedButton.styleFrom(
+                                        side: BorderSide(
+                                            color: Colors.grey[300]!),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(4.r),
+                                        ),
+                                      ),
                                     ),
-                                  ),
-                                  style: OutlinedButton.styleFrom(
-                                    side: BorderSide(color: Colors.grey[300]!),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(4.r),
-                                    ),
-                                  ),
-                                ),
+                                  );
+                                },
                               ),
                               SizedBox(height: isMobile ? 8.h : 24.h),
                               Center(

@@ -24,22 +24,4 @@ class LoginCubit extends Cubit<LoginState> {
     }
   }
 
-  Future<UserCredential?> signUpWithGoogle() async {
-    emit(LoginLoading());
-    try {
-      final GoogleSignInAccount? gUser = await GoogleSignIn().signIn();
-      if (gUser == null) return null;
-      final GoogleSignInAuthentication gAuth = await gUser.authentication;
-      final credential = GoogleAuthProvider.credential(
-        accessToken: gAuth.accessToken,
-        idToken: gAuth.idToken,
-      );
-      emit(LoginSuccess());
-      return await FirebaseAuth.instance.signInWithCredential(credential);
-    } on FirebaseAuthException catch (e) {
-      debugPrint(Failure.getMessageFromErrorCode(e.code));
-      emit(LoginFailure(Failure.getMessageFromErrorCode(e.code)));
-    }
-    return null;
-  }
 }
