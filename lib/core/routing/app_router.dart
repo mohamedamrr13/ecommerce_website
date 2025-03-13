@@ -3,6 +3,7 @@ import 'package:ecommerce_website/features/authentication/logic/login_cubit/logi
 import 'package:ecommerce_website/features/authentication/logic/register_cubit/register_cubit.dart';
 import 'package:ecommerce_website/features/authentication/presentation/login_screen.dart';
 import 'package:ecommerce_website/features/authentication/presentation/register_screen.dart';
+import 'package:ecommerce_website/features/cart/presentation/cart_screen.dart';
 import 'package:ecommerce_website/features/home/presentation/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,9 +18,9 @@ class AppRouter {
   static const changePassword = "/changePassword";
   static const verifyOtpCode = "/verifyOtpCode";
   static const homeScreen = "/homeScreen";
-
+  static const cartPage = "/cartPage";
   static GoRouter router = GoRouter(
-    initialLocation: homeScreen,
+    initialLocation: cartPage,
     errorPageBuilder: (context, state) => MaterialPage(
       key: state.pageKey,
       child: Scaffold(
@@ -52,6 +53,11 @@ class AppRouter {
           ],
           child: const RegisterScreen(),
         ),
+      ),
+      GoRoute(
+        path: cartPage,
+        name: cartPage,
+        builder: (context, state) => const CartScreen(),
       ),
       // GoRoute(
       //   path: forgetPassword,

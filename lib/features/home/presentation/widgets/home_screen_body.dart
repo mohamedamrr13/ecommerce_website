@@ -1,4 +1,4 @@
-import 'package:ecommerce_website/core/shared/custom_footer_widget.dart';
+import 'package:ecommerce_website/shared/custom_footer_widget.dart';
 import 'package:ecommerce_website/features/home/presentation/widgets/flash_sales_header.dart';
 import 'package:ecommerce_website/features/home/presentation/widgets/product_grid.dart';
 import 'package:flutter/material.dart';
