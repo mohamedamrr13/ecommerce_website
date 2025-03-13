@@ -15,7 +15,24 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
-  List<CartModel> cartItems = [];
+  List<CartModel> cartItems = [
+    CartModel(
+        name: "Controller",
+        price: 70,
+        image: "assets/images/Gamepad-Cart-Small.png"),
+    CartModel(
+        name: "Controller",
+        price: 70,
+        image: "assets/images/Gamepad-Cart-Small.png"),
+    CartModel(
+        name: "Controller",
+        price: 70,
+        image: "assets/images/Gamepad-Cart-Small.png"),
+    CartModel(
+        name: "Controller",
+        price: 70,
+        image: "assets/images/Gamepad-Cart-Small.png")
+  ];
 
   double get subtotal =>
       cartItems.fold(0, (sum, item) => sum + (item.price * item.quantity));
@@ -162,10 +179,12 @@ class _CartScreenState extends State<CartScreen> {
                 ],
               ),
             ),
-            AppConstraints.isMobile(context)
-                ? SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.3.w,
-                  )
+            cartItems.isEmpty
+                ? AppConstraints.isMobile(context)
+                    ? SizedBox(
+                        height: MediaQuery.of(context).size.width * 0.3.w,
+                      )
+                    : const SizedBox()
                 : const SizedBox(),
             const CustomFooterWidget()
           ],
@@ -321,22 +340,17 @@ class _CartScreenState extends State<CartScreen> {
                   const Divider(),
                   _buildTotalRow('Total:', '\$${subtotal + 60}'),
                   const SizedBox(height: 16),
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                        horizontal:
-                            AppConstraints.isMobile(context) ? 0 : 140.0),
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.zero),
-                        backgroundColor: Colors.black,
-                        padding: const EdgeInsets.symmetric(vertical: 16),
-                      ),
-                      child: const Text(
-                        'Proceed to checkout',
-                        style: TextStyle(color: Colors.white),
-                      ),
+                  ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.zero),
+                      backgroundColor: Colors.black,
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                    ),
+                    child: const Text(
+                      'Proceed to checkout',
+                      style: TextStyle(color: Colors.white),
                     ),
                   ),
                 ],
@@ -388,9 +402,8 @@ class _CartScreenState extends State<CartScreen> {
           Expanded(
             child: Text(
               item.name,
-              overflow: TextOverflow.ellipsis, // ADD THIS
-              maxLines: 1, // ADD THIS TO KEEP IT IN ONE LINE
-              // Optional: Adjust font size
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
             ),
           ),
         ],
