@@ -29,7 +29,6 @@ class HomeScreen extends StatelessWidget {
             ),
             AppBar(
               backgroundColor: Colors.white,
-              elevation: 0,
               title: Row(
                 children: [
                   const Text(
@@ -82,7 +81,7 @@ class HomeScreen extends StatelessWidget {
                   const SizedBox(width: 16),
                   ElevatedButton(
                     onPressed: () {
-                      GoRouter.of(context).push(AppRouter.loginScreen);
+                      GoRouter.of(context).go(AppRouter.loginScreen);
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.black,

@@ -18,7 +18,10 @@ class HomeScreenBody extends StatelessWidget {
               children: [
                 FlashSalesHeader(),
                 SizedBox(height: 24),
-                ProductGrid(),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.0),
+                  child: ProductGrid(),
+                ),
               ],
             ),
           ),
@@ -28,7 +31,3 @@ class HomeScreenBody extends StatelessWidget {
     );
   }
 }
-
-
-
-
