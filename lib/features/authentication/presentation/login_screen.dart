@@ -1,6 +1,7 @@
+import 'package:ecommerce_website/utils/appconstraints.dart';
 import 'package:ecommerce_website/core/routing/app_router.dart';
-import 'package:ecommerce_website/core/shared/custom_footer_widget.dart';
-import 'package:ecommerce_website/core/validation/text_validation.dart';
+import 'package:ecommerce_website/shared/custom_footer_widget.dart';
+import 'package:ecommerce_website/utils/validation/text_validation.dart';
 import 'package:ecommerce_website/features/authentication/logic/google_cubit/google_cubit.dart';
 import 'package:ecommerce_website/features/authentication/logic/login_cubit/login_cubit.dart';
 import 'package:ecommerce_website/features/authentication/presentation/widgets/custom_auth_appbar.dart';
@@ -32,8 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final isMobile = screenWidth < 600;
+
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -47,15 +47,15 @@ class _LoginScreenState extends State<LoginScreen> {
           children: [
             Padding(
               padding: EdgeInsets.symmetric(
-                horizontal: isMobile ? 16.w : 24.w,
-                vertical: isMobile ? 10.h : 60.h,
+                horizontal: AppConstraints.isMobile(context) ? 16.w : 24.w,
+                vertical: AppConstraints.isMobile(context) ? 10.h : 60.h,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
                     constraints: BoxConstraints(
-                      maxWidth: isMobile ? double.infinity : 300,
+                      maxWidth: AppConstraints.isMobile(context) ? double.infinity : 300,
                     ),
                     child: Form(
                       key: _formKey,
@@ -78,7 +78,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               Text(
                                 'Log In to Exclusive',
                                 style: TextStyle(
-                                  fontSize: isMobile ? 24.sp : 16.sp,
+                                  fontSize: AppConstraints.isMobile(context) ? 24.sp : 16.sp,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -86,7 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               Text(
                                 'Enter your details below',
                                 style: TextStyle(
-                                  fontSize: isMobile ? 14.sp : 8.sp,
+                                  fontSize: AppConstraints.isMobile(context) ? 14.sp : 8.sp,
                                   color: Colors.grey[600],
                                 ),
                               ),
@@ -163,7 +163,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       : Text(
                                           'Login',
                                           style: TextStyle(
-                                            fontSize: isMobile ? 16.sp : 8.sp,
+                                            fontSize: AppConstraints.isMobile(context) ? 16.sp : 8.sp,
                                             fontWeight: FontWeight.w500,
                                           ),
                                         ),
@@ -217,7 +217,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                               style: TextStyle(
                                                 color: Colors.black,
                                                 fontSize:
-                                                    isMobile ? 14.sp : 8.sp,
+                                                    AppConstraints.isMobile(
+                                                            context) ? 14.sp : 8.sp,
                                                 fontWeight: FontWeight.w500,
                                               ),
                                             ),
@@ -233,7 +234,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   );
                                 },
                               ),
-                              SizedBox(height: isMobile ? 8.h : 24.h),
+                              SizedBox(height: AppConstraints.isMobile(context) ? 8.h : 24.h),
                               Center(
                                 child: TextButton(
                                   onPressed: () {},
@@ -241,12 +242,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                     'Forgot Password ?',
                                     style: TextStyle(
                                       color: const Color(0xffDB4444),
-                                      fontSize: isMobile ? 14.sp : 8.sp,
+                                      fontSize: AppConstraints.isMobile(context) ? 14.sp : 8.sp,
                                     ),
                                   ),
                                 ),
                               ),
-                              SizedBox(height: isMobile ? 8.h : 24.h),
+                              SizedBox(height: AppConstraints.isMobile(context) ? 8.h : 24.h),
                               Center(
                                 child: TextButton(
                                   onPressed: () {
@@ -257,7 +258,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     'Don\'t Have An Account? Sign Up!',
                                     style: TextStyle(
                                       color: const Color(0xffDB4444),
-                                      fontSize: isMobile ? 14.sp : 8.sp,
+                                      fontSize: AppConstraints.isMobile(context) ? 14.sp : 8.sp,
                                     ),
                                   ),
                                 ),

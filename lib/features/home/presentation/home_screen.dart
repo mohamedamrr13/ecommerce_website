@@ -3,15 +3,21 @@ import 'package:ecommerce_website/features/home/presentation/widgets/home_screen
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[100],
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(120),
+        preferredSize: const Size.fromHeight(93),
         child: Column(
           children: [
             Container(
@@ -29,7 +35,6 @@ class HomeScreen extends StatelessWidget {
             ),
             AppBar(
               backgroundColor: Colors.white,
-              elevation: 0,
               title: Row(
                 children: [
                   const Text(
@@ -44,27 +49,32 @@ class HomeScreen extends StatelessWidget {
                   const SizedBox(
                     width: 60,
                   ),
-                  TextButton(
-                    onPressed: () {},
-                    child: const Text(
-                      'Home',
-                      style: TextStyle(color: Colors.black, fontSize: 16),
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () {},
-                    child: const Text(
-                      'Contact',
-                      style: TextStyle(color: Colors.black54, fontSize: 16),
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () {},
-                    child: const Text(
-                      'About',
-                      style: TextStyle(color: Colors.black54, fontSize: 16),
-                    ),
-                  ),
+                  // TextButton(
+                  //   onPressed: () {
+                  //     setState(() {
+                  //       currentIndex = 0;
+                  //     });
+                  //     GoRouter.of(context).go(AppRouter.homeScreen);
+                  //   },
+                  //   child: const Text(
+                  //     'Home',
+                  //     style: TextStyle(color: Colors.black, fontSize: 16),
+                  //   ),
+                  // ),
+                  // TextButton(
+                  //   onPressed: () {},
+                  //   child: const Text(
+                  //     'Contact',
+                  //     style: TextStyle(color: Colors.black54, fontSize: 16),
+                  //   ),
+                  // ),
+                  // TextButton(
+                  //   onPressed: () {},
+                  //   child: const Text(
+                  //     'About',
+                  //     style: TextStyle(color: Colors.black54, fontSize: 16),
+                  //   ),
+                  // ),
                   const Spacer(),
                   const SizedBox(width: 16),
                   IconButton(
@@ -82,7 +92,7 @@ class HomeScreen extends StatelessWidget {
                   const SizedBox(width: 16),
                   ElevatedButton(
                     onPressed: () {
-                      GoRouter.of(context).push(AppRouter.loginScreen);
+                      GoRouter.of(context).go(AppRouter.loginScreen);
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.black,

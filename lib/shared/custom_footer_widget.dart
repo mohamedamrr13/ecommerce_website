@@ -21,8 +21,9 @@ class _CustomFooterWidgetState extends State<CustomFooterWidget> {
         vertical: isMobile ? 30.h : 80.h,
       ),
       child: isMobile
-          ? Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+          ? Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Column(
                   children: [
@@ -47,7 +48,7 @@ class _CustomFooterWidgetState extends State<CustomFooterWidget> {
                         SizedBox(width: 16.w),
                         Icon(Icons.tiktok, color: Colors.white, size: 24.sp),
                       ],
-                    )
+                    ) 
                   ],
                 )
               ],
