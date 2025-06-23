@@ -1,4 +1,5 @@
 import 'package:ecommerce_website/features/home/presentation/widgets/product_item.dart';
+import 'package:ecommerce_website/utils/appconstraints.dart';
 import 'package:flutter/material.dart';
 
 class ProductGrid extends StatelessWidget {
@@ -9,13 +10,11 @@ class ProductGrid extends StatelessWidget {
     return GridView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 4,
-        childAspectRatio: 0.6,
-        crossAxisSpacing: 50,
-        mainAxisSpacing: 32,
-      ),
-      itemCount: 4,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: AppConstraints.screenWidth(context) <= 900 ? 2 : 4,
+          crossAxisSpacing: 32,
+          mainAxisSpacing: 0),
+      itemCount: 8,
       itemBuilder: (context, index) {
         return const ProductCard();
       },

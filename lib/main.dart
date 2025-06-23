@@ -44,12 +44,12 @@ Size _getDesignSize(BuildContext context) {
   if (shortestSide < 600) {
     // Mobile (Phones)
     return const Size(
-        360, 600); // Common mobile design size (e.g., Google Pixel)
+        360, 600); 
   } else if (shortestSide < 1200) {
     // Tablet
-    return const Size(768, 1024); // Common tablet design size (e.g., iPad)
+    return const Size(768, 1024); 
   } else {
     // PC (Desktop/Large screens)
-    return const Size(1440, 1024); // Common desktop design size
+    return const Size(1440, 1024);
   }
 }

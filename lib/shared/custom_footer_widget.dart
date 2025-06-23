@@ -36,7 +36,7 @@ class _CustomFooterWidgetState extends State<CustomFooterWidget> {
                       ),
                     ),
                     SizedBox(
-                        height: 16.h), // Add spacing between text and icons
+                        height: 16.h),
                     Row(
                       mainAxisAlignment:
                           MainAxisAlignment.center, // Align icons to the left

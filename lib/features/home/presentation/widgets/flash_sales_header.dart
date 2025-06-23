@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class FlashSalesHeader extends StatelessWidget {
   const FlashSalesHeader({super.key});
@@ -16,12 +17,12 @@ class FlashSalesHeader extends StatelessWidget {
               color: Colors.red,
             ),
             const SizedBox(width: 8),
-            const Text(
+            Text(
               "Our Products",
               style: TextStyle(
                 color: Colors.red,
                 fontWeight: FontWeight.bold,
-                fontSize: 16,
+                fontSize: 12.sp,
               ),
             ),
           ],
@@ -29,21 +30,12 @@ class FlashSalesHeader extends StatelessWidget {
         const SizedBox(height: 8),
         Row(
           children: [
-            const Text(
+            Text(
               'Premium Classic Watches',
               style: TextStyle(
-                fontSize: 24,
+                fontSize: 12.sp,
                 fontWeight: FontWeight.bold,
               ),
-            ),
-            const Spacer(),
-            IconButton(
-              icon: const Icon(Icons.chevron_left),
-              onPressed: () {},
-            ),
-            IconButton(
-              icon: const Icon(Icons.chevron_right),
-              onPressed: () {},
             ),
           ],
         ),
