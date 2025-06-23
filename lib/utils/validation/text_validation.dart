@@ -20,7 +20,7 @@ class TextValidation {
     } else if (!isValidEmail(value)) {
       return 'Enter a valid email';
     }
-    return null; // Email is valid
+    return null; 
   }
 
   static String? passwordValidator(String? value) {
@@ -31,7 +31,7 @@ class TextValidation {
     } else if (!isValidPassword(value)) {
       return 'Password must contain at least one letter, one number, and one special character';
     }
-    return null; // Password is valid
+    return null; 
   }
 }
 

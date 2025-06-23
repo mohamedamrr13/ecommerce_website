@@ -8,4 +8,7 @@ class AppConstraints {
   static bool isMobile(BuildContext context) {
     return screenWidth(context) < 600;
   }
+  static bool isTablet(BuildContext context) {
+    return screenWidth(context) >= 600 && screenWidth(context) <=1200;
+  }
 }

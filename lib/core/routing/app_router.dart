@@ -16,11 +16,11 @@ class AppRouter {
   static const loginScreen = "/login";
   static const forgetPassword = "/forgetPassword";
   static const changePassword = "/changePassword";
-  static const verifyOtpCode = "/verifyOtpCode";
+  static const verifyOtpCode = "/verifyOtpC`o`de";
   static const homeScreen = "/homeScreen";
   static const cartPage = "/cartPage";
   static GoRouter router = GoRouter(
-    initialLocation: cartPage,
+    initialLocation: homeScreen,
     errorPageBuilder: (context, state) => MaterialPage(
       key: state.pageKey,
       child: Scaffold(

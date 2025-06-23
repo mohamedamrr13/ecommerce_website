@@ -243,6 +243,7 @@ class _CartScreenState extends State<CartScreen> {
                                   Row(
                                     children: [
                                       IconButton(
+                                        padding: EdgeInsets.zero,
                                         icon: const Icon(
                                           Icons.remove,
                                           size: 12,
@@ -252,6 +253,7 @@ class _CartScreenState extends State<CartScreen> {
                                       ),
                                       Text('${item.quantity}'),
                                       IconButton(
+                                        padding: EdgeInsets.zero,
                                         icon: const Icon(
                                           Icons.add,
                                           size: 12,

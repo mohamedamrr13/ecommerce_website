@@ -1,6 +1,8 @@
 import 'package:ecommerce_website/core/routing/app_router.dart';
 import 'package:ecommerce_website/features/home/presentation/widgets/home_screen_body.dart';
+import 'package:ecommerce_website/features/home/presentation/widgets/search_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -12,6 +14,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int currentIndex = 0;
+  bool isSearchExpanded = false; // NEW
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,72 +41,51 @@ class _HomeScreenState extends State<HomeScreen> {
               backgroundColor: Colors.white,
               title: Row(
                 children: [
-                  const Text(
+                  Text(
                     'Exclusive',
                     style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
-                      fontSize: 24,
+                      fontSize: 15.sp,
                     ),
                   ),
                   const Spacer(),
-                  const SizedBox(
-                    width: 60,
-                  ),
-                  // TextButton(
-                  //   onPressed: () {
-                  //     setState(() {
-                  //       currentIndex = 0;
-                  //     });
-                  //     GoRouter.of(context).go(AppRouter.homeScreen);
-                  //   },
-                  //   child: const Text(
-                  //     'Home',
-                  //     style: TextStyle(color: Colors.black, fontSize: 16),
-                  //   ),
-                  // ),
-                  // TextButton(
+                  // const SizedBox(width: 60),
+                  // IconButton(
+                  //   icon: const Icon(Icons.favorite_border),
                   //   onPressed: () {},
-                  //   child: const Text(
-                  //     'Contact',
-                  //     style: TextStyle(color: Colors.black54, fontSize: 16),
-                  //   ),
                   // ),
-                  // TextButton(
-                  //   onPressed: () {},
-                  //   child: const Text(
-                  //     'About',
-                  //     style: TextStyle(color: Colors.black54, fontSize: 16),
-                  //   ),
-                  // ),
-                  const Spacer(),
-                  const SizedBox(width: 16),
-                  IconButton(
-                    icon: const Icon(Icons.search),
-                    onPressed: () {},
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.favorite_border),
-                    onPressed: () {},
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.shopping_cart_outlined),
-                    onPressed: () {},
-                  ),
-                  const SizedBox(width: 16),
-                  ElevatedButton(
-                    onPressed: () {
-                      GoRouter.of(context).go(AppRouter.loginScreen);
+                  if (!isSearchExpanded) ...[
+                    IconButton(
+                      icon: const Icon(Icons.shopping_cart_outlined),
+                      onPressed: () {
+                        GoRouter.of(context).go(AppRouter.cartPage);
+                      },
+                    ),
+                    SizedBox(width: 5.w),
+                    ElevatedButton(
+                      onPressed: () {
+                        GoRouter.of(context).go(AppRouter.loginScreen);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.black,
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 12.sp, vertical: 8.sp),
+                      ),
+                      child: const Text(
+                        'Login',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 5.w,
+                    ),
+                  ],
+                  CustomSearchBar(
+                    onChanged: (p0) {},
+                    onExpandChanged: (expanded) {
+                      setState(() => isSearchExpanded = expanded);
                     },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.black,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 24, vertical: 12),
-                    ),
-                    child: const Text(
-                      'Login',
-                      style: TextStyle(color: Colors.white),
-                    ),
                   ),
                 ],
               ),
