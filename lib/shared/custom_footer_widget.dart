@@ -28,15 +28,14 @@ class _CustomFooterWidgetState extends State<CustomFooterWidget> {
                 Column(
                   children: [
                     Text(
-                      'Exclusive',
+                      'Knouz',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20.sp,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(
-                        height: 16.h),
+                    SizedBox(height: 16.h),
                     Row(
                       mainAxisAlignment:
                           MainAxisAlignment.center, // Align icons to the left
@@ -48,7 +47,7 @@ class _CustomFooterWidgetState extends State<CustomFooterWidget> {
                         SizedBox(width: 16.w),
                         Icon(Icons.tiktok, color: Colors.white, size: 24.sp),
                       ],
-                    ) 
+                    )
                   ],
                 )
               ],
@@ -59,7 +58,7 @@ class _CustomFooterWidgetState extends State<CustomFooterWidget> {
                 Expanded(
                   child: Column(
                     children: [
-                      _buildFooterSection('Exclusive', []),
+                      _buildFooterSection('Knouz', []),
                       Row(
                         mainAxisAlignment:
                             MainAxisAlignment.center, // Align icons to the left
@@ -82,7 +81,7 @@ class _CustomFooterWidgetState extends State<CustomFooterWidget> {
                     'Support',
                     [
                       '111 Bijoy sarani, Dhaka,\nDH 1515, Bangladesh.',
-                      'exclusive@gmail.com',
+                      'knouz@gmail.com',
                       '+88015-88888-9999',
                     ],
                   ),
@@ -138,8 +137,9 @@ class _CustomFooterWidgetState extends State<CustomFooterWidget> {
             child: TextButton(
               onPressed: () {},
               style: TextButton.styleFrom(
+                splashFactory: ,
                 minimumSize: Size.zero,
-                padding: EdgeInsets.zero,
+                padding: const EdgeInsets.all(16),
               ),
               child: Text(
                 item,

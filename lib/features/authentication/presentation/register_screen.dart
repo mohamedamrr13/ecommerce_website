@@ -78,7 +78,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Sign Up to Exclusive',
+                              'Sign Up to Knouz',
                               style: TextStyle(
                                 fontSize: AppConstraints.isMobile(context) ? 24.sp : 14.sp,
                                 fontWeight: FontWeight.bold,

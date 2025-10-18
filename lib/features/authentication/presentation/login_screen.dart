@@ -33,18 +33,13 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-
-
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(120),
-        child: CustomAuthAppbar(),
-      ),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(
           children: [
+            const CustomAuthAppbar(),
             Padding(
               padding: EdgeInsets.symmetric(
                 horizontal: AppConstraints.isMobile(context) ? 16.w : 24.w,
@@ -55,7 +50,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 children: [
                   Container(
                     constraints: BoxConstraints(
-                      maxWidth: AppConstraints.isMobile(context) ? double.infinity : 300,
+                      maxWidth: AppConstraints.isMobile(context)
+                          ? double.infinity
+                          : 300,
                     ),
                     child: Form(
                       key: _formKey,
@@ -76,9 +73,11 @@ class _LoginScreenState extends State<LoginScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Log In to Exclusive',
+                                'Log In to Knouz',
                                 style: TextStyle(
-                                  fontSize: AppConstraints.isMobile(context) ? 24.sp : 16.sp,
+                                  fontSize: AppConstraints.isMobile(context)
+                                      ? 24.sp
+                                      : 16.sp,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -86,7 +85,9 @@ class _LoginScreenState extends State<LoginScreen> {
                               Text(
                                 'Enter your details below',
                                 style: TextStyle(
-                                  fontSize: AppConstraints.isMobile(context) ? 14.sp : 8.sp,
+                                  fontSize: AppConstraints.isMobile(context)
+                                      ? 14.sp
+                                      : 8.sp,
                                   color: Colors.grey[600],
                                 ),
                               ),
@@ -163,7 +164,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                       : Text(
                                           'Login',
                                           style: TextStyle(
-                                            fontSize: AppConstraints.isMobile(context) ? 16.sp : 8.sp,
+                                            fontSize:
+                                                AppConstraints.isMobile(context)
+                                                    ? 16.sp
+                                                    : 8.sp,
                                             fontWeight: FontWeight.w500,
                                           ),
                                         ),
@@ -218,7 +222,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                                 color: Colors.black,
                                                 fontSize:
                                                     AppConstraints.isMobile(
-                                                            context) ? 14.sp : 8.sp,
+                                                            context)
+                                                        ? 14.sp
+                                                        : 8.sp,
                                                 fontWeight: FontWeight.w500,
                                               ),
                                             ),
@@ -234,7 +240,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                   );
                                 },
                               ),
-                              SizedBox(height: AppConstraints.isMobile(context) ? 8.h : 24.h),
+                              SizedBox(
+                                  height: AppConstraints.isMobile(context)
+                                      ? 8.h
+                                      : 24.h),
                               Center(
                                 child: TextButton(
                                   onPressed: () {},
@@ -242,12 +251,17 @@ class _LoginScreenState extends State<LoginScreen> {
                                     'Forgot Password ?',
                                     style: TextStyle(
                                       color: const Color(0xffDB4444),
-                                      fontSize: AppConstraints.isMobile(context) ? 14.sp : 8.sp,
+                                      fontSize: AppConstraints.isMobile(context)
+                                          ? 14.sp
+                                          : 8.sp,
                                     ),
                                   ),
                                 ),
                               ),
-                              SizedBox(height: AppConstraints.isMobile(context) ? 8.h : 24.h),
+                              SizedBox(
+                                  height: AppConstraints.isMobile(context)
+                                      ? 8.h
+                                      : 24.h),
                               Center(
                                 child: TextButton(
                                   onPressed: () {
@@ -258,7 +272,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                     'Don\'t Have An Account? Sign Up!',
                                     style: TextStyle(
                                       color: const Color(0xffDB4444),
-                                      fontSize: AppConstraints.isMobile(context) ? 14.sp : 8.sp,
+                                      fontSize: AppConstraints.isMobile(context)
+                                          ? 14.sp
+                                          : 8.sp,
                                     ),
                                   ),
                                 ),

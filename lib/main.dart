@@ -24,10 +24,10 @@ class MyApp extends StatelessWidget {
       designSize: _getDesignSize(context),
       builder: (context, child) => MediaQuery(
           data: MediaQuery.of(context)
-              .copyWith(textScaler: const TextScaler.linear(1.0)),
+              .copyWith(textScaler:     const TextScaler.linear(1.0)),
           child: SafeArea(
             child: MaterialApp.router(
-              title: "Exclusive",
+              title: "KNOUZ",
               routerConfig: AppRouter.router,
               theme: ThemeData(fontFamily: 'Poppins'),
               debugShowCheckedModeBanner: false,

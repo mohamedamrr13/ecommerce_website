@@ -45,25 +45,25 @@ class _CartScreenState extends State<CartScreen> {
         preferredSize: const Size.fromHeight(93),
         child: Column(
           children: [
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              color: Colors.black,
-              child: const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Winter Sale For All Watches And Express Delivery - OFF 50%!',
-                    style: TextStyle(color: Colors.white, fontSize: 14),
-                  ),
-                ],
-              ),
-            ),
+            // Container(
+            //   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            //   color: Colors.black,
+            //   child: const Row(
+            //     mainAxisAlignment: MainAxisAlignment.center,
+            //     children: [
+            //       Text(
+            //         'Winter Sale For All Watches And Express Delivery - OFF 50%!',
+            //         style: TextStyle(color: Colors.white, fontSize: 14),
+            //       ),
+            //     ],
+            //   ),
+            // ),
             AppBar(
               backgroundColor: Colors.white,
               title: Row(
                 children: [
                   const Text(
-                    'Exclusive',
+                    'Knouz',
                     style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
@@ -118,16 +118,9 @@ class _CartScreenState extends State<CartScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   // Breadcrumb
-                  const Row(
-                    children: [
-                      Text('Home'),
-                      Text(' / '),
-                      Text('Cart',
-                          style: TextStyle(fontWeight: FontWeight.bold)),
-                    ],
-                  ),
+
                   SizedBox(
-                      height: AppConstraints.isMobile(context) ? 30.h : 60.h),
+                      height: AppConstraints.isMobile(context) ? 30.h : 30.h),
 
                   // Cart items table
                   CartItemsSection(),

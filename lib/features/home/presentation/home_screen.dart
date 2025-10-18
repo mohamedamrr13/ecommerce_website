@@ -42,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
               title: Row(
                 children: [
                   Text(
-                    'Exclusive',
+                    'Knouz',
                     style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,

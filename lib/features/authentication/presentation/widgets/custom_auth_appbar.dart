@@ -21,7 +21,7 @@ class CustomAuthAppbar extends StatelessWidget {
             children: [
               Flexible(
                 child: Text(
-                  'Winter Sale For All Watches And Express Delivery - OFF 50%!',
+                  'Winter Sale For All Perfumes And Express Delivery - OFF 50%!',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: isMobile ? 12 : 14,
@@ -32,23 +32,23 @@ class CustomAuthAppbar extends StatelessWidget {
             ],
           ),
         ),
-        AppBar(
-          leading: null,
-          automaticallyImplyLeading: false,
-          backgroundColor: Colors.white,
-          elevation: 0,
-          title: Row(
-            children: [
-              Text(
-                'Exclusive',
+        Row(
+          children: [
+            const SizedBox(
+              width: 10,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Text(
+                'Knouz',
                 style: TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
                   fontSize: isMobile ? 20 : 24,
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ],
     );
